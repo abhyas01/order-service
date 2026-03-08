@@ -23,6 +23,12 @@ npm install
 
 ## Environment Variables
 
+Copy the example file and fill in your values:
+
+```bash
+cp .env.example .env
+```
+
 | Variable             | Default         | Description          |
 | -------------------- | --------------- | -------------------- |
 | DB_HOST              | localhost       | Database host        |
@@ -36,6 +42,12 @@ npm install
 
 ```bash
 npm start
+```
+
+## Running Tests
+
+```bash
+npm test
 ```
 
 ## API Endpoints
