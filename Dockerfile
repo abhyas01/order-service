@@ -1,7 +1,7 @@
 FROM node:18-alpine AS deps
 WORKDIR /app
-COPY src/package*.json ./
-RUN npm ci --only=production
+COPY src/package.json ./
+RUN npm install --only=production
 
 FROM node:18-alpine AS production
 

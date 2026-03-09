@@ -4,15 +4,47 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "jest"
+    "test:unit": "jest --testPathPattern=unit --coverage --coverageReporters=lcov --coverageReporters=text --forceExit",
+    "test:integration": "jest --testPathPattern=integration --forceExit --runInBand --testTimeout=30000",
+    "test:ci": "npm run test:unit",
+    "lint": "eslint . --ext .js --max-warnings=0"
   },
-  "devDependencies": {
-    "jest": "^29.5.0"
+  "jest": {
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>",
+      "<rootDir>/../tests"
+    ],
+    "testMatch": [
+      "**/*.test.js"
+    ],
+    "modulePaths": [
+      "<rootDir>/node_modules"
+    ],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "*.js",
+      "!index.js",
+      "!.eslintrc.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 70,
+        "functions": 70,
+        "branches": 60,
+        "statements": 70
+      }
+    }
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "pg": "^8.11.0",
+    "axios": "^1.4.0",
     "cors": "^2.8.5",
-    "axios": "^1.4.0"
+    "express": "^4.18.2",
+    "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.45.0",
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3"
   }
 }
