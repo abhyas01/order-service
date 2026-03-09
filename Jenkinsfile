@@ -7,7 +7,7 @@ pipeline {
 
   environment {
     SERVICE_NAME  = 'order-service'
-    IMAGE_NAME    = 'abhyas01/order-service'
+    IMAGE_NAME    = '01abhyas/order-service'
     SONAR_PROJECT = 'ecommerce-order-service'
   }
 
@@ -29,6 +29,12 @@ pipeline {
       }
     }
 
+    stage('Lint') {
+      steps {
+        dir('src') { sh 'npm run lint' }
+      }
+    }
+    
     stage('Unit Test') {
       steps {
         dir('src') { sh 'npm run test:unit' }
