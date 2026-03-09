@@ -1,6 +1,6 @@
 services:
   database:
-    image: abhyas01/ecommerce-database:latest
+    image: 01abhyas/ecommerce-database:latest
     environment:
       POSTGRES_DB: ecommerce
       POSTGRES_USER: postgres
@@ -15,7 +15,7 @@ services:
       start_period: 10s
 
   product-service:
-    image: abhyas01/product-service:latest
+    image: 01abhyas/product-service:latest
     environment:
       DB_HOST: database
       DB_NAME: ecommerce
@@ -36,7 +36,7 @@ services:
       start_period: 15s
 
   order-service:
-    image: abhyas01/order-service:latest
+    image: 01abhyas/order-service:latest
     environment:
       DB_HOST: database
       DB_NAME: ecommerce
@@ -60,7 +60,7 @@ services:
       start_period: 15s
 
   frontend:
-    image: abhyas01/ecommerce-frontend:latest
+    image: 01abhyas/ecommerce-frontend:latest
     ports:
       - "3000:80"
     depends_on:
