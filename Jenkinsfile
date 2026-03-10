@@ -78,11 +78,12 @@ pipeline {
         dir('src') {
           sh '''
             DB_HOST=localhost \
-            DB_PORT=5433 \
+            DB_PORT=15433 \
             DB_NAME=ecommerce \
             DB_USER=postgres \
             DB_PASSWORD=password \
             PRODUCT_SERVICE_HOST=localhost \
+            PRODUCT_SERVICE_PORT=13001 \
             npm run test:integration
           '''
         }
