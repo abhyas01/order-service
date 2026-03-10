@@ -63,8 +63,9 @@ app.post('/orders', async (req, res) => {
     }
 
     const productHost = process.env.PRODUCT_SERVICE_HOST || 'product-service';
+    const productPort = process.env.PRODUCT_SERVICE_PORT || 3001;
     const productResponse = await axios.get(
-      `http://${productHost}:3001/products/${productId}`,
+      `http://${productHost}:${productPort}/products/${productId}`,
     );
     const product = productResponse.data;
     const totalPrice = product.price * quantity;
