@@ -29,6 +29,26 @@ pipeline {
       }
     }
 
+    stage('Dependency Audit') {
+      steps {
+        dir('src') {
+          sh '''
+            set -eu
+            mkdir -p ../artifacts
+            echo "=== npm audit ===" 
+            npm audit --audit-level=high --json > ../artifacts/npm-audit-report.json || true
+            npm audit --audit-level=high || true
+            echo "=== Audit complete ==="
+          '''
+        }
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: 'artifacts/npm-audit-report.json', allowEmptyArchive: true
+        }
+      }
+    }
+
     stage('Lint') {
       steps {
         dir('src') { sh 'npm run lint' }
@@ -60,6 +80,16 @@ pipeline {
           dockerTag: env.DOCKER_TAG,
           context:   '.',
           target:    'production',
+        )
+      }
+    }
+
+    stage('Trivy Scan') {
+      when { not { changeRequest() } }
+      steps {
+        trivyScan(
+          imageName: env.IMAGE_NAME,
+          dockerTag: env.DOCKER_TAG,
         )
       }
     }
