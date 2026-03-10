@@ -17,7 +17,7 @@ const pool = new Pool({
 });
 
 // Base URL for product-service (used to seed test products via its API)
-const PRODUCT_API = `http://${process.env.PRODUCT_SERVICE_HOST || "localhost"}:3001`;
+const PRODUCT_API = `http://${process.env.PRODUCT_SERVICE_HOST || "localhost"}:${process.env.PRODUCT_SERVICE_PORT || 3001}`;
 
 // Helpers
 async function createProduct(name, price, description = "") {
